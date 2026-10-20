@@ -61,7 +61,7 @@ Modern e-commerce and logistics networks suffer from opaque delivery statuses, m
 
 ```mermaid
 flowchart TD
-    subgraph Clients [Frontend Client Interfaces (React + Vite)]
+    subgraph Clients ["Frontend Client Interfaces"]
         CustomerUI["Customer Tracking Portal"]
         AdminUI["Operations & AI Radar"]
         WarehouseUI["Warehouse Scan Terminal"]
@@ -69,12 +69,12 @@ flowchart TD
         SimLabUI["Simulation & Scenario Lab"]
     end
 
-    subgraph Gateway [API & Routing Layer]
-        FastAPI["FastAPI Application Gateway (:8000)"]
-        WSServer["WebSocket Telemetry Engine (:8000/ws)"]
+    subgraph Gateway ["API and Routing Layer"]
+        FastAPI["FastAPI Application Gateway (Port 8000)"]
+        WSServer["WebSocket Telemetry Engine (/ws)"]
     end
 
-    subgraph CoreServices [Core Application Services]
+    subgraph CoreServices ["Core Application Services"]
         OrderService["Order & SLA Management"]
         LifecycleService["Shipment State Machine"]
         EventLedgerService["Immutable Event Audit Ledger"]
@@ -82,15 +82,15 @@ flowchart TD
         NotificationService["Idempotent Notification Dispatcher"]
     end
 
-    subgraph AIEngine [Machine Learning & Anomaly Layer]
-        DelayModel["Random Forest Delay Predictor (96.8% Acc)"]
-        ETAModel["Random Forest Transit Regressor (RMSE 91m)"]
+    subgraph AIEngine ["Machine Learning and Anomaly Layer"]
+        DelayModel["Random Forest Delay Predictor - 96.8% Acc"]
+        ETAModel["Random Forest Transit Regressor - RMSE 91m"]
         AnomalyDetector["Telemetry & Speed Glitch Detector"]
         RiskRadar["Operational Risk Classifier"]
     end
 
-    subgraph Storage [Persistence & Cache]
-        SQLDB[("Relational DB (PostgreSQL / SQLite)")]
+    subgraph Storage ["Persistence and Cache"]
+        SQLDB[("Relational Database - PostgreSQL or SQLite")]
         ModelStore[("Trained Joblib Model Artifacts")]
     end
 
@@ -153,8 +153,8 @@ sequenceDiagram
         Courier->>System: Report Exception (GATE_ACCESS_DENIED)
         System->>System: Status: DELIVERY_EXCEPTION
         System->>Phone: Trigger Authorized Voice Call to Customer
-        Phone->>Customer: "Delivery agent at gate. Please confirm access code."
-        Customer->>Phone: "Code is 4491, leave with leasing office."
+        Phone->>Customer: Delivery agent at gate - please confirm access code.
+        Customer->>Phone: Code is 4491 - leave with leasing office.
         Phone->>System: Log Call Transcript & Update Resolution Notes
     end
 ```
@@ -224,24 +224,24 @@ The system architecture utilizes a normalized relational schema with 21 core ent
 
 ```mermaid
 erDiagram
-    USERS ||--o| CUSTOMERS : "has profile"
-    USERS ||--o| DELIVERY_AGENTS : "has profile"
-    CUSTOMERS ||--o{ ORDERS : "places"
-    ADDRESSES ||--o{ ORDERS : "delivery address"
-    ADDRESSES ||--o{ ORDERS : "pickup address"
-    ORDERS ||--|{ PACKAGES : "contains"
-    WAREHOUSES ||--o{ STORAGE_LOCATIONS : "contains"
-    WAREHOUSES ||--o{ PACKAGES : "stores"
-    VEHICLES ||--o{ DELIVERY_AGENTS : "assigned to"
-    DELIVERY_AGENTS ||--o{ AGENT_ASSIGNMENTS : "receives"
-    PACKAGES ||--o{ AGENT_ASSIGNMENTS : "assigned in"
-    PACKAGES ||--o{ SHIPMENT_EVENTS : "audit history"
-    PACKAGES ||--o{ SHIPMENT_LEGS : "transit legs"
-    PACKAGES ||--o| PROOF_OF_DELIVERY : "verified by"
-    PACKAGES ||--o{ DELIVERY_EXCEPTIONS : "encounters"
-    PACKAGES ||--o{ CUSTOMER_CONTACT_ATTEMPTS : "triggers"
-    PACKAGES ||--o{ INVESTIGATION_TICKETS : "escalates to"
-    PACKAGES ||--o{ MODEL_PREDICTIONS : "scored by"
+    USERS ||--o| CUSTOMERS : has_profile
+    USERS ||--o| DELIVERY_AGENTS : has_profile
+    CUSTOMERS ||--o{ ORDERS : places
+    ADDRESSES ||--o{ ORDERS : delivery_address
+    ADDRESSES ||--o{ ORDERS : pickup_address
+    ORDERS ||--|{ PACKAGES : contains
+    WAREHOUSES ||--o{ STORAGE_LOCATIONS : contains
+    WAREHOUSES ||--o{ PACKAGES : stores
+    VEHICLES ||--o{ DELIVERY_AGENTS : assigned_to
+    DELIVERY_AGENTS ||--o{ AGENT_ASSIGNMENTS : receives
+    PACKAGES ||--o{ AGENT_ASSIGNMENTS : assigned_in
+    PACKAGES ||--o{ SHIPMENT_EVENTS : audit_history
+    PACKAGES ||--o{ SHIPMENT_LEGS : transit_legs
+    PACKAGES ||--o| PROOF_OF_DELIVERY : verified_by
+    PACKAGES ||--o{ DELIVERY_EXCEPTIONS : encounters
+    PACKAGES ||--o{ CUSTOMER_CONTACT_ATTEMPTS : triggers
+    PACKAGES ||--o{ INVESTIGATION_TICKETS : escalates_to
+    PACKAGES ||--o{ MODEL_PREDICTIONS : scored_by
 ```
 
 ### Core Entities Summary
