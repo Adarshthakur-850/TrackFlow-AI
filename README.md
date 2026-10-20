@@ -9,6 +9,7 @@
 [![Docker](https://img.shields.io/badge/Docker-Enabled-2496ED.svg?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 [![Live Demo](https://img.shields.io/badge/Live_Demo-GitHub_Pages-2ea44f.svg?style=for-the-badge&logo=github&logoColor=white)](https://adarshthakur-850.github.io/TrackFlow-AI/)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/Adarshthakur-850/TrackFlow-AI)
 
 > **🚀 Public Live Demo:** The application is hosted publicly on GitHub Pages at:  
 > **[https://adarshthakur-850.github.io/TrackFlow-AI/](https://adarshthakur-850.github.io/TrackFlow-AI/)**
@@ -41,9 +42,10 @@
 - [9. Security, Privacy & Audit Guarantees](#9-security-privacy--audit-guarantees)
 - [10. Step-by-Step Installation & Local Quickstart](#10-step-by-step-installation--local-quickstart)
 - [11. Containerized Deployment (Docker Compose)](#11-containerized-deployment-docker-compose)
-- [12. Automated Testing Suite](#12-automated-testing-suite)
-- [13. Repository Structure](#13-repository-structure)
-- [14. Troubleshooting & FAQ](#14-troubleshooting--faq)
+- [12. Cloud Hosting on Render (FastAPI & React)](#12-cloud-hosting-on-render-fastapi--react)
+- [13. Automated Testing Suite](#13-automated-testing-suite)
+- [14. Repository Structure](#14-repository-structure)
+- [15. Troubleshooting & FAQ](#15-troubleshooting--faq)
 
 ---
 
@@ -438,7 +440,44 @@ Services started:
 
 ---
 
-## 12. Automated Testing Suite
+
+---
+
+## 12. Cloud Hosting on Render (FastAPI & React)
+
+TrackFlow AI is configured for 1-click cloud hosting on [Render](https://render.com) using the included `render.yaml` Blueprint.
+
+### Option A: One-Click Blueprint Deployment (Recommended)
+1. Click the button below:  
+   [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/Adarshthakur-850/TrackFlow-AI)
+2. Connect your GitHub account and click **Apply**.
+3. Render will automatically provision:
+   - `trackflow-backend`: Free Web Service running FastAPI and the trained ML models.
+   - `trackflow-frontend`: Free Static Site serving the React SPA with automatic HTTPS.
+
+### Option B: Manual Render Dashboard Setup
+If deploying the backend manually:
+1. Go to [dashboard.render.com](https://dashboard.render.com) -> **New +** -> **Web Service**.
+2. Connect your repository: `https://github.com/Adarshthakur-850/TrackFlow-AI`.
+3. Configure the following settings:
+   - **Name:** `trackflow-backend`
+   - **Root Directory:** `backend`
+   - **Environment:** `Python 3`
+   - **Region:** `Oregon (US West)` or closest to you
+   - **Branch:** `main`
+   - **Build Command:** `pip install -r requirements.txt && python ml/train_models.py`
+   - **Start Command:** `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
+   - **Plan:** Free
+4. Add Environment Variables:
+   - `PYTHON_VERSION`: `3.11.9`
+   - `TELEPHONY_SANDBOX`: `True`
+   - `SMS_SANDBOX`: `True`
+   - `SECRET_KEY`: (Click 'Generate' in Render)
+5. Click **Create Web Service**. Your API will be live at `https://trackflow-backend.onrender.com/docs`!
+
+---
+
+## 13. Automated Testing Suite
 
 The repository includes a comprehensive `pytest` test suite covering order creation, state transitions, strict POD verification, exception handling, telephony logs, and ML predictions.
 
@@ -459,7 +498,7 @@ tests/test_orders_shipments.py::test_failed_delivery_and_telephony_workflow PASS
 
 ---
 
-## 13. Repository Structure
+## 14. Repository Structure
 
 ```
 TrackFlow AI/
@@ -533,7 +572,7 @@ TrackFlow AI/
 
 ---
 
-## 14. Troubleshooting & FAQ
+## 15. Troubleshooting & FAQ
 
 #### Q1: Why did the tracking ID return 404 on initial launch?
 **A:** Ensure the database has been seeded with demo packages (`TRK-20261020-1001`, `TRK-20261020-1002`, `TRK-20261020-1003`). The system automatically seeds these upon application startup in `lifespan`. You can also click **Re-Seed Logistics Hubs & Fleet** inside the **Simulation Lab** tab.
