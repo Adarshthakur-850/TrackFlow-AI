@@ -8,6 +8,10 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4+-38B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
 [![Docker](https://img.shields.io/badge/Docker-Enabled-2496ED.svg?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-GitHub_Pages-2ea44f.svg?style=for-the-badge&logo=github&logoColor=white)](https://adarshthakur-850.github.io/TrackFlow-AI/)
+
+> **🚀 Public Live Demo:** The application is hosted publicly on GitHub Pages at:  
+> **[https://adarshthakur-850.github.io/TrackFlow-AI/](https://adarshthakur-850.github.io/TrackFlow-AI/)**
 
 **TrackFlow AI** is a production-grade, AI-powered package tracking and intelligent delivery management platform. It provides end-to-end auditability across the entire supply chain—from order confirmation, merchant pickup, and warehouse sortation to line-haul dispatch, last-mile courier tracking, strict proof-of-delivery (POD) verification, and automated recovery workflows.
 
