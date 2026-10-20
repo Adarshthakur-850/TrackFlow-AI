@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: trackflow_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: trackflow
+      POSTGRES_USER: trackflow_user
+      POSTGRES_PASSWORD: trackflow_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U trackflow_user -d trackflow"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: trackflow_backend
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: sqlite:///./trackflow.db
+      SECRET_KEY: trackflow-super-secret-key-change-in-production-2026-auth
+      TELEPHONY_SANDBOX: "True"
+      SMS_SANDBOX: "True"
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    volumes:
+      - ./backend/models_store:/app/models_store
+      - ./backend/trackflow.db:/app/trackflow.db
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: trackflow_frontend
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
