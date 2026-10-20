@@ -11,8 +11,11 @@
 [![Live Demo](https://img.shields.io/badge/Live_Demo-GitHub_Pages-2ea44f.svg?style=for-the-badge&logo=github&logoColor=white)](https://adarshthakur-850.github.io/TrackFlow-AI/)
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/Adarshthakur-850/TrackFlow-AI)
 
-> **🚀 Public Live Demo:** The application is hosted publicly on GitHub Pages at:  
-> **[https://adarshthakur-850.github.io/TrackFlow-AI/](https://adarshthakur-850.github.io/TrackFlow-AI/)**
+> ### 🌐 Quick Links & Public Deployments
+> - **🚀 Live Web Application (GitHub Pages):** [https://adarshthakur-850.github.io/TrackFlow-AI/](https://adarshthakur-850.github.io/TrackFlow-AI/)
+> - **☁️ 1-Click Cloud Deployment (Render):** [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/Adarshthakur-850/TrackFlow-AI)
+> - **🐙 GitHub Repository:** [https://github.com/Adarshthakur-850/TrackFlow-AI](https://github.com/Adarshthakur-850/TrackFlow-AI)
+> - **📖 Swagger API Documentation:** Available at `/docs` on the FastAPI backend (local or cloud)
 
 **TrackFlow AI** is a production-grade, AI-powered package tracking and intelligent delivery management platform. It provides end-to-end auditability across the entire supply chain—from order confirmation, merchant pickup, and warehouse sortation to line-haul dispatch, last-mile courier tracking, strict proof-of-delivery (POD) verification, and automated recovery workflows.
 
@@ -42,7 +45,7 @@
 - [9. Security, Privacy & Audit Guarantees](#9-security-privacy--audit-guarantees)
 - [10. Step-by-Step Installation & Local Quickstart](#10-step-by-step-installation--local-quickstart)
 - [11. Containerized Deployment (Docker Compose)](#11-containerized-deployment-docker-compose)
-- [12. Cloud Hosting on Render (FastAPI & React)](#12-cloud-hosting-on-render-fastapi--react)
+- [12. Cloud Hosting & Public Deployment (Render & GitHub Pages)](#12-cloud-hosting--public-deployment-render--github-pages)
 - [13. Automated Testing Suite](#13-automated-testing-suite)
 - [14. Repository Structure](#14-repository-structure)
 - [15. Troubleshooting & FAQ](#15-troubleshooting--faq)
@@ -307,12 +310,12 @@ In compliance with delivery regulations, TrackFlow AI does not assume customer c
 
 ```mermaid
 flowchart LR
-    Exception[Delivery Exception Reported] --> Trigger[Telephony Sandbox Adapter]
-    Trigger --> OutboundCall[Outbound Voice Call Dialed]
-    OutboundCall --> SpeechRecognition[IVR Voice Assistant]
+    Exception["Delivery Exception Reported"] --> Trigger["Telephony Sandbox Adapter"]
+    Trigger --> OutboundCall["Outbound Voice Call Dialed"]
+    OutboundCall --> SpeechRecognition["IVR Voice Assistant"]
     SpeechRecognition --> CustomerReply["Customer Response Recorded"]
-    CustomerReply --> EventLog[Log into Immutable Event History]
-    CustomerReply --> TicketUpdate[Update Ticket with Instructions]
+    CustomerReply --> EventLog["Log into Immutable Event History"]
+    CustomerReply --> TicketUpdate["Update Ticket with Instructions"]
 ```
 
 ### Sandbox IVR Call Example
@@ -440,40 +443,106 @@ Services started:
 
 ---
 
+## 12. Cloud Hosting & Public Deployment (Render & GitHub Pages)
+
+TrackFlow AI is engineered with dual-mode deployment support:
+1. **Zero-Backend Static Demo** hosted automatically on **GitHub Pages** (with an in-browser state engine).
+2. **Full-Stack Cloud Deployment** hosted on **Render** (FastAPI backend + React frontend + PostgreSQL database).
 
 ---
 
-## 12. Cloud Hosting on Render (FastAPI & React)
+### 🌐 Live Public Access Links
 
-TrackFlow AI is configured for 1-click cloud hosting on [Render](https://render.com) using the included `render.yaml` Blueprint.
+| Service | Hosting Provider | URL / Direct Action | Status |
+| :--- | :--- | :--- | :--- |
+| **Interactive Frontend** | **GitHub Pages** | [https://adarshthakur-850.github.io/TrackFlow-AI/](https://adarshthakur-850.github.io/TrackFlow-AI/) | 🟢 **Active / Live** |
+| **1-Click Full-Stack Deploy** | **Render** | [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/Adarshthakur-850/TrackFlow-AI) | 🚀 **1-Click Ready** |
+| **FastAPI Swagger Docs** | **Render / Local** | `https://<your-render-backend-url>/docs` or `http://127.0.0.1:8000/docs` | 🟢 **Self-Documenting** |
 
-### Option A: One-Click Blueprint Deployment (Recommended)
+---
+
+### Option 1: Live Demo on GitHub Pages (Instant In-Browser Experience)
+
+The frontend is deployed to GitHub Pages and available instantly at:  
+👉 **[https://adarshthakur-850.github.io/TrackFlow-AI/](https://adarshthakur-850.github.io/TrackFlow-AI/)**
+
+#### How the GitHub Pages Architecture Works:
+- **Automated CI/CD Workflow (`.github/workflows/deploy-pages.yml`)**: Every push to `main` builds the Vite application with `base: './'` and publishes the production bundles directly to GitHub Pages.
+- **Resilient In-Browser State Engine**: If a live FastAPI backend is unreachable (or for users opening the static link directly), the frontend seamlessly transitions to an in-memory mock engine. All 5 personas remain fully functional:
+  - Tracking packages and viewing live radar telemetry
+  - Inbound warehouse barcode scanning and bin allocation
+  - Courier runsheet management and strict OTP proof-of-delivery validation
+  - Telephony IVR simulation with realistic speech transcripts and ticket escalations
+
+---
+
+### Option 2: One-Click Full-Stack Deployment on Render (Blueprint)
+
+Deploy both the FastAPI backend and React frontend to Render in one click using the pre-configured [`render.yaml`](render.yaml) Blueprint:
+
 1. Click the button below:  
    [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/Adarshthakur-850/TrackFlow-AI)
-2. Connect your GitHub account and click **Apply**.
-3. Render will automatically provision:
-   - `trackflow-backend`: Free Web Service running FastAPI and the trained ML models.
-   - `trackflow-frontend`: Free Static Site serving the React SPA with automatic HTTPS.
+2. Log in to [Render](https://render.com) with GitHub.
+3. Select your repository: `https://github.com/Adarshthakur-850/TrackFlow-AI`.
+4. Click **Apply Blueprint**. Render automatically provisions:
+   - **`trackflow-backend` (Web Service)**: Python 3.11 environment. Automatically installs `requirements.txt`, trains the Scikit-Learn Random Forest models (`ml/train_models.py`), and starts `uvicorn`.
+   - **`trackflow-frontend` (Static Site)**: Node environment. Builds the Vite React SPA (`npm run build`) with automatic rewrite rules (`/* -> /index.html`).
 
-### Option B: Manual Render Dashboard Setup
-If deploying the backend manually:
-1. Go to [dashboard.render.com](https://dashboard.render.com) -> **New +** -> **Web Service**.
-2. Connect your repository: `https://github.com/Adarshthakur-850/TrackFlow-AI`.
-3. Configure the following settings:
+---
+
+### Option 3: Manual Render Deployment Guide
+
+If you prefer to configure services manually via the [Render Dashboard](https://dashboard.render.com):
+
+#### 1. Deploy the Backend Web Service:
+1. Click **New +** -> **Web Service**.
+2. Connect `https://github.com/Adarshthakur-850/TrackFlow-AI`.
+3. Fill in the configuration:
    - **Name:** `trackflow-backend`
    - **Root Directory:** `backend`
    - **Environment:** `Python 3`
-   - **Region:** `Oregon (US West)` or closest to you
+   - **Region:** `Oregon (US West)` or your preferred region
    - **Branch:** `main`
    - **Build Command:** `pip install -r requirements.txt && python ml/train_models.py`
    - **Start Command:** `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
-   - **Plan:** Free
-4. Add Environment Variables:
+   - **Plan:** `Free`
+4. In **Advanced** -> **Environment Variables**, add:
    - `PYTHON_VERSION`: `3.11.9`
    - `TELEPHONY_SANDBOX`: `True`
    - `SMS_SANDBOX`: `True`
-   - `SECRET_KEY`: (Click 'Generate' in Render)
-5. Click **Create Web Service**. Your API will be live at `https://trackflow-backend.onrender.com/docs`!
+   - `SECRET_KEY`: *(Click 'Generate')*
+5. Click **Create Web Service**. Wait for build to complete. Your API will be live at `https://trackflow-backend.onrender.com`.
+
+#### 2. Deploy the Frontend Static Site:
+1. Click **New +** -> **Static Site**.
+2. Connect the same repository.
+3. Fill in the configuration:
+   - **Name:** `trackflow-frontend`
+   - **Root Directory:** `frontend`
+   - **Build Command:** `npm install && npm run build`
+   - **Publish Directory:** `dist`
+4. In **Redirects / Rewrites**, add:
+   - **Source:** `/*`
+   - **Destination:** `/index.html`
+   - **Action:** `Rewrite`
+5. In **Environment Variables**, set:
+   - `VITE_API_URL`: `https://trackflow-backend.onrender.com/api/v1` *(replace with your actual backend URL)*
+6. Click **Create Static Site**.
+
+---
+
+### Option 4: Connecting the Frontend to a Custom Backend
+
+To link any frontend instance (local, GitHub Pages, or custom domain) to a deployed backend:
+```bash
+# Set environment variable before build
+export VITE_API_URL="https://trackflow-backend.onrender.com/api/v1"
+npm run build
+```
+Or create a `.env.production` file inside `frontend/`:
+```env
+VITE_API_URL=https://trackflow-backend.onrender.com/api/v1
+```
 
 ---
 
@@ -564,8 +633,10 @@ TrackFlow AI/
 │   └── vite.config.ts                   # Vite build tool and API proxy config
 ├── .github/
 │   └── workflows/
-│       └── ci.yml                       # GitHub Actions CI/CD pipeline
+│       ├── ci.yml                       # GitHub Actions CI/CD test pipeline
+│       └── deploy-pages.yml             # Automated GitHub Pages build & deployment workflow
 ├── docker-compose.yml                   # Multi-service container orchestration
+├── render.yaml                          # Render 1-click cloud deployment blueprint
 ├── .gitignore                           # Git ignore rules
 └── README.md                            # Comprehensive project documentation
 ```
@@ -578,16 +649,32 @@ TrackFlow AI/
 **A:** Ensure the database has been seeded with demo packages (`TRK-20261020-1001`, `TRK-20261020-1002`, `TRK-20261020-1003`). The system automatically seeds these upon application startup in `lifespan`. You can also click **Re-Seed Logistics Hubs & Fleet** inside the **Simulation Lab** tab.
 
 #### Q2: Can a courier mark an order delivered without the customer's OTP?
-**A:** No. The `/proof-of-delivery` endpoint rejects submissions where `verification_type == "OTP"` and the provided code does not match the generated delivery OTP stored on the package.
+**A:** No. The `/proof-of-delivery` endpoint strictly rejects submissions where `verification_type == "OTP"` and the provided code does not match the generated delivery OTP stored on the package.
 
 #### Q3: How do I switch from SQLite to PostgreSQL?
-**A:** Update the `DATABASE_URL` environment variable in `backend/.env` or Docker Compose:
+**A:** Update the `DATABASE_URL` environment variable in `backend/.env`, Render Dashboard, or Docker Compose:
 ```env
 DATABASE_URL=postgresql://trackflow_user:trackflow_password@localhost:5432/trackflow
 ```
 
 #### Q4: Are external telephony and SMS credentials required?
-**A:** No. `TELEPHONY_SANDBOX=True` and `SMS_SANDBOX=True` are enabled by default. Outbound calls and customer speech responses are synthesized with full audit logging so the complete recovery lifecycle can be verified locally without third-party telecommunications fees.
+**A:** No. `TELEPHONY_SANDBOX=True` and `SMS_SANDBOX=True` are enabled by default. Outbound calls and customer speech responses are synthesized with full audit logging so the complete recovery lifecycle can be verified locally or in cloud demos without third-party telecommunications fees.
+
+#### Q5: How does the public GitHub Pages demo work without an active backend server?
+**A:** The frontend includes an intelligent in-browser simulation and state manager ([`frontend/src/services/api.ts`](frontend/src/services/api.ts)). If the live API endpoint `/api/v1` is unreachable (e.g., when visiting the static GitHub Pages deployment directly), it automatically intercepts requests and simulates state transitions, live radar telemetry, OTP validation, and IVR telephony calls purely in memory.
+
+#### Q6: How do I link the frontend to my cloud-deployed Render backend?
+**A:** When running or building the frontend, set the `VITE_API_URL` environment variable to your Render backend API endpoint:
+```bash
+export VITE_API_URL="https://trackflow-backend.onrender.com/api/v1"
+```
+Or create a `.env.production` file inside `frontend/` with:
+```env
+VITE_API_URL=https://trackflow-backend.onrender.com/api/v1
+```
+
+#### Q7: Does Render free tier cause cold starts?
+**A:** Yes. Free web services on Render spin down after 15 minutes of inactivity. When a new request arrives, it may take 30–50 seconds to spin up. Once awake, response times are sub-second. If you prefer zero sleep time, upgrade the Render instance to Starter or host on a persistent VM.
 
 ---
 
